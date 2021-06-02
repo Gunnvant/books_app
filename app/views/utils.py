@@ -96,8 +96,9 @@ class BookReviews():
         slug = "/lists.json"
         url = self.base_url+slug
         params = {"api-key":self.api_key}
-        if "list" in kwargs:
-            params["list"] = kwargs['list']
+        if kwargs.get("list") is None:
+            raise Exception("List parameter should be provided")
+        params["list"] = kwargs['list']
         if "bestsellers-date" in kwargs:
             params['bestsellers-date'] = self._validate_date(kwargs["bestsellers-date"])
         if "published-date" in kwargs:
@@ -171,4 +172,106 @@ class BookReviews():
         resp = requests.get(url,params=params)
         return resp.json()
     
-    def 
+    def best_sellers_history(self,**kwargs):
+        '''
+        Hits the /lists/best-sellers/history.json
+
+        Parameters:
+
+        age-group: Target age group (string)
+        
+        author: The author of the best seller. The author field does not include additional contributors.
+                When searching the author field, you can specify any combination of first, middle and last names.
+                When sort-by is set to author, the results will be sorted by author's first name.
+        
+        contributor: The author of the best seller, as well as other contributors such as the illustrator 
+                    (to search or sort by author name only, use author instead).When searching, 
+                    you can specify any combination of first, middle and last names of any of the contributors.
+                    When sort-by is set to contributor, the results will be sorted by the first name of the first contributor listed.
+
+        isbn: International Standard Book Number, 10 or 13 digits. A best seller may have both 10-digit and 13-digit ISBNs, 
+            and may have multiple ISBNs of each type. To search on multiple ISBNs, separate the ISBNs with semicolons (example: 9780446579933;0061374229).
+
+        offset: must be a multiple of 20. Sets the starting point of the result set (0, 20, ...). Used to paginate thru results if there are more than 20. 
+                Defaults to 0. The num_results field indicates how many results there are total.
+        
+        price: The publisher's list price of the best seller, including decimal point
+        
+        publisher: The standardized name of the publisher
+        
+        title: The title of the best seller. When searching, you can specify a portion of a title or a full title.
+
+        Sample response: 
+        {
+            "status": "OK",
+            "copyright": "Copyright (c) 2019 The New York Times Company.  All Rights Reserved.",
+            "num_results": 28970,
+            "results": [
+                {
+                "title": "#GIRLBOSS",
+                "description": "An online fashion retailer traces her path to success.",
+                "contributor": "by Sophia Amoruso",
+                "author": "Sophia Amoruso",
+                "contributor_note": "",
+                "price": 0,
+                "age_group": "",
+                "publisher": "Portfolio/Penguin/Putnam",
+                "isbns": [
+                    {
+                    "isbn10": "039916927X",
+                    "isbn13": "9780399169274"
+                    }
+                ],
+                "ranks_history": [
+                    {
+                    "primary_isbn10": "1591847931",
+                    "primary_isbn13": "9781591847939",
+                    "rank": 8,
+                    "list_name": "Business Books",
+                    "display_name": "Business",
+                    "published_date": "2016-03-13",
+                    "bestsellers_date": "2016-02-27",
+                    "weeks_on_list": 0,
+                    "ranks_last_week": null,
+                    "asterisk": 0,
+                    "dagger": 0
+                    }
+                ],
+                "reviews": [
+                    {
+                    "book_review_link": "",
+                    "first_chapter_link": "",
+                    "sunday_review_link": "",
+                    "article_chapter_link": ""
+                    }
+                ]
+                }
+            ]
+            }
+        '''
+        slug = "/lists/best-selllers/history.json"
+        url = self.base_url+slug 
+        params = {"api-key":self.api_key}
+        options = ["age-group","author","contributor","isbn","offset","price","publisher","title"]
+        for option in options:
+            if option in kwargs:
+                params[option] = kwargs[option]
+        resp = requests.get(url,params=params)
+        return resp.json()
+    
+    def get_reviews(self,**kwargs):
+        '''
+        '''
+        slug = "/reviews.json"
+        url = self.base_url+slug 
+        params = {"api-key":self.api_key}
+        options = ["isbn","title","author" ]
+        cnt = 0
+        for option in options:
+            if option in kwargs:
+                cnt+=1
+                params[option] = kwargs[option]
+        if cnt==0:
+            raise Exception("Must provide either author, title or isbn as one of the parameters")
+        resp = requests.get(url,params=params)
+        return resp.json()
