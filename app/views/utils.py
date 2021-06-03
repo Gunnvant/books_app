@@ -18,8 +18,6 @@ class BookReviews:
         """
         Implements the /lists/names.json endpoint of the official api
         This can be used to get the lists hosted on the api
-        Sample response
-        {  "status": "OK",  "copyright": "Copyright (c) 2019 The New York Times Company.  All Rights Reserved.",  "num_results": 53,  "results": [    {      "list_name": "Combined Print and E-Book Fiction",      "display_name": "Combined Print & E-Book Fiction",      "list_name_encoded": "combined-print-and-e-book-fiction",      "oldest_published_date": "2011-02-13",      "newest_published_date": "2016-03-20",      "updated": "WEEKLY"    }  ]}
         """
         slug = "/lists/names.json"
         url = self.base_url + slug
