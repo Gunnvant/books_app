@@ -29,7 +29,7 @@ Sample Response:
 
 ```
 
-```
+```python
 get_list()
 ```
 Implements the /lists.json endpoint of the official api. This can be used fetch data about a particular list obtained by hitting the /lists/names.json endpoint.
@@ -99,41 +99,40 @@ Sample Response
 
 ```json
 {
-                "status": "OK",
-                "copyright": "Copyright (c) 2019 The New York Times Company.  All Rights Reserved.",
-                "num_results": 210,
-                "results": {
-                    "bestsellers_date": "2016-03-05",
-                    "published_date": "2016-03-20",
-                    "lists": [
-                    {
-                        "list_id": 704,
-                        "list_name": "Combined Print and E-Book Fiction",
-                        "display_name": "Combined Print & E-Book Fiction",
-                        "updated": "WEEKLY",
-                        "list_image": "http://du.ec2.nytimes.com.s3.amazonaws.com/prd/books/9780399175954.jpg",
-                        "books": [
-                        {
-                            "age_group": "",
-                            "author": "Clive Cussler and Justin Scott",
-                            "contributor": "by Clive Cussler and Justin Scott",
-                            "contributor_note": "",
-                            "created_date": "2016-03-10 12:00:22",
-                            "description": "In the ninth book in this series, set in 1906, the New York detective Isaac Bell contends with a crime boss passing as a respectable businessman and a tycoon’s plot against President Theodore Roosevelt.",
-                            "price": 0,
-                            "primary_isbn13": "9780698406421",
-                            "primary_isbn10": "0698406427",
-                            "publisher": "Putnam",
-                            "rank": 1,
-                            "title": "THE GANGSTER",
-                            "updated_date": "2016-03-10 17:00:21"
-                        }
-                        ]
-                    }
-                    ]
-                }
-            }
-
+  "status": "OK",
+  "copyright": "Copyright (c) 2019 The New York Times Company.  All Rights Reserved.",
+  "num_results": 210,
+  "results": {
+    "bestsellers_date": "2016-03-05",
+    "published_date": "2016-03-20",
+    "lists": [
+      {
+        "list_id": 704,
+        "list_name": "Combined Print and E-Book Fiction",
+        "display_name": "Combined Print & E-Book Fiction",
+        "updated": "WEEKLY",
+        "list_image": "http://du.ec2.nytimes.com.s3.amazonaws.com/prd/books/9780399175954.jpg",
+        "books": [
+          {
+            "age_group": "",
+            "author": "Clive Cussler and Justin Scott",
+            "contributor": "by Clive Cussler and Justin Scott",
+            "contributor_note": "",
+            "created_date": "2016-03-10 12:00:22",
+            "description": "In the ninth book in this series, set in 1906, the New York detective Isaac Bell contends with a crime boss passing as a respectable businessman and a tycoon’s plot against President Theodore Roosevelt.",
+            "price": 0,
+            "primary_isbn13": "9780698406421",
+            "primary_isbn10": "0698406427",
+            "publisher": "Putnam",
+            "rank": 1,
+            "title": "THE GANGSTER",
+            "updated_date": "2016-03-10 17:00:21"
+          }
+        ]
+      }
+    ]
+  }
+}
 ```
 
 ```python
