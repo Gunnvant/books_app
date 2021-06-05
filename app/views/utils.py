@@ -1,5 +1,5 @@
 import requests
-import re
+from datetime import datetime
 
 class ListParamAbsent(Exception):
     pass
@@ -9,16 +9,17 @@ class InvalidDate(Exception):
 
 class AtleastOneParam(Exception):
     pass
+
 class BookReviews:
     def __init__(self, api_key):
         self.api_key = api_key
         self.base_url = "https://api.nytimes.com/svc/books/v3"
 
     def _validate_date(self, date_string):
-        date_pattern = re.compile(r"\d{4}-\d{2}-\d{2}")
-        if re.findall(date_pattern, date_string):
+        try:
+            datetime.strptime(date_string,"%Y-%m-%d")
             return date_string
-        else:
+        except:
             raise InvalidDate("Date string is not valid")
 
     def get_list_names(self):
@@ -123,7 +124,7 @@ class BookReviews:
                When searching, you can specify a portion of a title or a full title.
 
         """
-        slug = "/lists/best-selllers/history.json"
+        slug = "/lists/best-sellers/history.json"
         url = self.base_url + slug
         params = {"api-key": self.api_key}
         options = [

@@ -15,7 +15,7 @@ def create_app(*args, **kwargs):
         )
         return response
 
-    app.register_blueprint(api_views, url_prefix="/apiv3")
+    app.register_blueprint(api_views, url_prefix="/apiv1")
 
     @app.errorhandler(404)
     def not_found(error):
@@ -44,7 +44,7 @@ def create_app(*args, **kwargs):
 
     @app.errorhandler(500)
     def server_error(error):
-        message = {"succes": False, "error": 500, "message": "server error"}
+        message = {"success": False, "error": 500, "message": "server error"}
         return jsonify(message), 500
 
     return app
